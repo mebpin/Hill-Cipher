@@ -1,4 +1,5 @@
-
+//Hill Cipher
+//Code by Bipin Timalsina
 #include<iostream>
 using namespace std;
 
@@ -113,21 +114,25 @@ class HillCipher{
 	       cout << endl;
 	  }	
 	  //multiplying message matrix with key matrix 
-	  cout<<"Multiplying message with key  in mod 26 .. The resultant matrix is : \n";
+	  cout<<"Multiplying message with key  in mod 26 .. \n";
 	int mult[row][2];
-	  for(int i=0; i<row; i++)
-        {
-            for(int j=0; j<2; j++)
-            {
-                mult[i][j]=0;
-                for(int k=0; k<row; k++){
-                	mult[i][j]+=msg2D[i][k]*key[k][j];
-				}
-                 mult[i][j]= mod(mult[i][j],26);   
-                cout<<mult[i][j]<<" ";
-            }
-            cout <<endl;
+	int i,j,k,sum=0;
+	  for (i = 0; i < row; i++) {
+      for (j = 0; j < 2; j++) {
+        for (k = 0; k < 2; k++) {
+          sum = sum + msg2D[i][k] * key[k][j];
         }
+        mult[i][j] = mod(sum,26);
+        sum = 0;
+      }
+    }
+ 
+    cout<<" The result of matrix multiplication is: \n "; 
+    for (i = 0; i < row; i++) {
+      for (j = 0; j < 2; j++)
+        cout<<mult[i][j]<<" ";
+      cout<<" \n ";
+    }
  	//generating cipherText
     for (int i =0; i <row; i++){
     	for (int j = 0 ; j<2; j++){
@@ -189,21 +194,26 @@ class HillCipher{
 		cout<<endl;
 	}
 	//multiplying  message matrix with inverse of key matrix 
-	  cout<<"Multiplying message with inverse key  in mod 26 .. The resultant matrix is : \n";
+	  cout<<"Multiplying message with inverse key  in mod 26 .. \n";
+	
 	int mult[row][2];
-	  for(int i=0; i<row; i++)
-        {
-            for(int j=0; j<2; j++)
-            {
-                mult[i][j]=0;
-                for(int k=0; k<row; k++){
-                	mult[i][j]+=msg2D[i][k]*keyInvrs[k][j];
-				}
-            	mult[i][j]= mod(mult[i][j],26);   
-                cout<<mult[i][j]<<" ";
-            }
-            cout <<endl;
+	int i,j,k,sum=0;
+	  for (i = 0; i < row; i++) {
+      for (j = 0; j < 2; j++) {
+        for (k = 0; k < 2; k++) {
+          sum = sum + msg2D[i][k] * keyInvrs[k][j];
         }
+        mult[i][j] = mod(sum,26);
+        sum = 0;
+      }
+    }
+ 
+    cout<<" The result of matrix multiplication is: \n "; 
+    for (i = 0; i < row; i++) {
+      for (j = 0; j < 2; j++)
+        cout<<mult[i][j]<<" ";
+      cout<<" \n ";
+    }
  	//generating plaintText
     for (int i =0; i <row; i++){
     	for (int j = 0 ; j<2; j++){
